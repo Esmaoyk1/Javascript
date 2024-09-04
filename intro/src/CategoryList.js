@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { ListGroup, ListGroupItem } from "reactstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 export default class CategoryList extends Component {
   constructor(props) {
@@ -7,8 +9,9 @@ export default class CategoryList extends Component {
     this.state = {
       categories: [
         { categoryId: 1, categoryName: "İçecek" },
-        { categoryId: 2, categoryName: "Yemek" }
+        { categoryId: 2, categoryName: "Yemek" },
       ],
+      currentCategory : ""
     };
   }
 
@@ -16,24 +19,14 @@ export default class CategoryList extends Component {
     return (
       <div>
         <h3> {this.props.info.title} </h3>{" "}
-        <h4> {this.props.info.Baskabisey} </h4> <h4>{this.state.counter}</h4>
+        
+        
         <ListGroup>
-          <ListGroupItem tag="a" href="#">
-            Cras justo odio{" "}
-          </ListGroupItem>{" "}
-          <ListGroupItem tag="a" href="#">
-            Dapibus ac facilisis in
-          </ListGroupItem>{" "}
-          <ListGroupItem tag="a" href="#">
-            Morbi leo risus{" "}
-          </ListGroupItem>{" "}
-          <ListGroupItem tag="a" href="#">
-            Porta ac consectetur ac{" "}
-          </ListGroupItem>{" "}
-          <ListGroupItem tag="a" href="#">
-            Vestibulum at eros{" "}
-          </ListGroupItem>{" "}
-        </ListGroup>{" "}
+          {this.state.categories.map((category) => (
+            <ListGroupItem  onClick={()=> this.setState({currentCategory:category.categoryName})}     key={category.categoryId}>{category.categoryName}</ListGroupItem>
+          ))}
+        </ListGroup>
+        <h4>{this.state.currentCategory}</h4>
       </div>
     );
   }
